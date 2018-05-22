@@ -1,0 +1,2 @@
+Demo Apache Thrift đơn giản với simple server
+client thực hiện hàm multiply được định nghĩa trong server với tham số đầu vào là 4 và 5
