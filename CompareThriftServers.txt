@@ -20,19 +20,22 @@ Khác:
 	TNonblockingServer tiết kiệm tài nguyên hơn THsHaServer
 	TNonblockingServer xử lý chậm hơn THsHaServer
 
--TThreadPoolServer
-Nó sẽ thực sự giải quyết cùng lúc nhiều client (số lượng có thể hạn định). Với mỗi kết nối tới sẽ được chấp nhận nó sẽ xử lý nó (nếu số có luồng đang trống) hoặc đợi một luồng nào đó kết thúc để được chấp nhận và xử lý.
-==>Trong 1 vài tình huống Threadpool sẽ xử lý nhanh hơn (luồng được tạo sẵn) tuy nhiên nó sẽ rất tôn sài nguyên do cần duy trì các luồng đó.
+-TThreadedSelectorServer 
+Có thể nói các thức hoạt động rất giống THsHaServer. Điểm khác biệt chính của TThreadedSelectorServer và THsHaServer là số lượng luồng Nhận kết nối ( THsHaServer có 1 luồng thực hiện nhiệm vụ này còn TThreadedSelectorServer thì nhiều hơn (mặc định là 2)). Điều này giúp điều phối các kết nối đã được chấp nhận một cách tốt hơn ==> Xử lý tối ưu hơn.
 
-==>TThreadpoolServer vs TNonblockingServer
+
+-TThreadPoolServer
+Nó sẽ thực sự giải quyết cùng lúc nhiều client (số lượng có thể hạn định). Với mỗi kết nối tới sẽ được chấp nhận và sẽ xử lý nó (nếu có luồng đang trống) hoặc đợi một luồng nào đó kết thúc để được chấp nhận và xử lý.
+==>Trong 1 vài tình huống Threadpool sẽ xử lý nhanh hơn (luồng được tạo sẵn) tuy nhiên nó sẽ rất tốn tài nguyên do cần duy trì các luồng đó.
+
+==>TThreadpoolServer vs TThreadedSelectorServer,THsHaServer
 Giống:
 	Cả hai đều thật sự xử lý cùng lúc nhiều yêu cầu.
 Khác:
-	Khi tất cả các luồng đang xử lý thì ThreadpoolServer sẽ  khóa các luồng yêu cầu kết nối còn THsHaServer thì không.
+	Khi tất cả các luồng đang xử lý thì ThreadpoolServer sẽ  khóa các luồng yêu cầu kết nối còn TThreadedSelectorServer,THsHaServer thì không.
 	TThreadPool sẽ tốn tài nguyên hơn THsHaServer.
 
--TThreadedSelectorServer 
-Có thể nói các thức hoạt động rất giống THsHaServer. Điểm khác biệt chính của TThreadedSelectorServer và THsHaServer là số lượng luồng Nhận kết nối ( THsHaServer có 1 luồng thực hiện nhiệm vụ này còn TThreadedSelectorServer thì nhiều hơn (mặc định là 2)). Điều này giúp điều phối các kết nối đã được chấp nhận một cách tốt hơn ==> Xử lý tối ưu hơn.
+
 
 
 
