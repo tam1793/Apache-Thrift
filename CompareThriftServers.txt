@@ -1,0 +1,44 @@
+-TSimpleServer
+Chỉ chấp nhận và xử lý 1 client 1 lúc. Nếu có nhiều client kết nối thì tất cả phải đợi client đang kết nối kết thúc mới có thể bắt đầu được xử lý lần lượt.
+
+-TNonblockingServer 
+Giải quyết được vấn đề của TSimpleServer: 
+Nó sẽ không chặn nhiều client yêu cầu đồng thời nhưng vẫn chỉ giải quyết 1 lần 1 process.
+Các process sẽ được đưa vào 1 selector để quyết định process nào đc làm việc tiếp theo.
+Vì vậy nếu 1 process cần 1s để hoàn thành thì với 10 process tương tự cần 10s để hoàn thành (tuy chấp nhận nhiều kết nối nhưng thực sự chỉ giải quyết từng kết nối một)
+
+-THsHaServer
+Có thể xem đây như là cài tiến của TNonblockingServer. Nó không chỉ không chặn nhiều client yêu cầu đồng thời và nó còn có thể
+giải quyết 1 lần nhiều process (số process đươc giải quyết đồng thời có thể được quy định với mặc định là 5)
+Vì vậy nếu 1 process cần 1s để hoàn thành thì với 10 process tương tự  có thể chỉ cần 1s(nếu cho phép 10 process hoạt động cùng lúc).
+
+==> TNonblockingServer vs THsHaServer 
+Giống: 
+	Cả hai đều có thể nhận nhiều client cùng lúc
+	Có thể chấp nhận được nhiều client kết nối cùng lúc mà server không có vấn đề gì (Yêu cầu THsHaServer cấp số lượng process phù hợp)
+Khác:
+	TNonblockingServer tiết kiệm tài nguyên hơn THsHaServer
+	TNonblockingServer xử lý chậm hơn THsHaServer
+
+-TThreadPoolServer
+Nó sẽ thực sự giải quyết cùng lúc nhiều client (số lượng có thể hạn định). Với mỗi kết nối tới sẽ được chấp nhận nó sẽ xử lý nó (nếu số có luồng đang trống) hoặc đợi một luồng nào đó kết thúc để được chấp nhận và xử lý.
+==>Trong 1 vài tình huống Threadpool sẽ xử lý nhanh hơn (luồng được tạo sẵn) tuy nhiên nó sẽ rất tôn sài nguyên do cần duy trì các luồng đó.
+
+==>TThreadpoolServer vs TNonblockingServer
+Giống:
+	Cả hai đều thật sự xử lý cùng lúc nhiều yêu cầu.
+Khác:
+	Khi tất cả các luồng đang xử lý thì ThreadpoolServer sẽ  khóa các luồng yêu cầu kết nối còn THsHaServer thì không.
+	TThreadPool sẽ tốn tài nguyên hơn THsHaServer.
+
+-TThreadedSelectorServer 
+Có thể nói các thức hoạt động rất giống THsHaServer. Điểm khác biệt chính của TThreadedSelectorServer và THsHaServer là số lượng luồng Nhận kết nối ( THsHaServer có 1 luồng thực hiện nhiệm vụ này còn TThreadedSelectorServer thì nhiều hơn (mặc định là 2)). Điều này giúp điều phối các kết nối đã được chấp nhận một cách tốt hơn ==> Xử lý tối ưu hơn.
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+Với mô hình kết nối Client - Sever (có thể đáp ứng số lượng yêu cầu rất lớn, Xử lý nhiều yêu cầu cùng một lúc) thì mô hình ThreadedSelectorServer là loại hình Server tốt nhất.
+
+
+
+
