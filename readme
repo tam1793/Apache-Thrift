@@ -1,2 +1,12 @@
+--Folder : multiple
 Demo Apache Thrift đơn giản với simple server
 client thực hiện hàm multiply được định nghĩa trong server với tham số đầu vào là 4 và 5
+server trả về tích của hai số client gửi lên (4 và 5)
+
+--Folder: TestServer
+Sử dụng TThreadPoolServer với minWorker = 20. Sử dụng TFastFramedTransport và TBinaryProtocol
+Client gửi request Ping() và server đếm số lượng request mà client gửi được lên rồi kết thúc xử lý mà không trả bất kì thông tin gì cho client
+
+Số lượng request server nhận được trung bình 100k req/s, max = 110k req/s;
+
+Chú thích: Số lượng trên chỉ đạt được khi server xử lý request Ping(), Nếu server xử lý request Add(int n1, int n2) (nhận 2 số từ client và trả về client tổng của chúng) thì chỉ đạt 40k req/s.
