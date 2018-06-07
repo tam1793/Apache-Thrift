@@ -1,0 +1,8 @@
+-- Thực hiện Client connection pool với các thông tin
+	Server : 
+		TThreadPoolServer với MinWorker = 20
+	
+	Client : 
+		Mở 1 pool có 5 thread thực hiện nhiệm vụ lấy kết nối trong connection pool để gửi yêu cầu lên server, sau đó trả kết nối lại pool và nghỉ 0,1 giây sau khi lặp lại nhiệm vụ.
+		Một connection pool cho phép tối đa 3 kết nối được mở ==> có sự tương tác việc lấy và trả kết nối của các thread làm nhiệm vụ ró nét.
+		
