@@ -10,3 +10,6 @@ Client gửi request Ping() và server đếm số lượng request mà client g
 Số lượng request server nhận được trung bình 100k req/s, max = 110k req/s;
 
 Chú thích: Số lượng trên chỉ đạt được khi server xử lý request Ping(), Nếu server xử lý request Add(int n1, int n2) (nhận 2 số từ client và trả về client tổng của chúng) thì chỉ đạt 40k req/s.
+
+--Folder: TestClient
+Thực hiện client connection pool với thông tin chi tiết trong file readme bên trong folder TestClient
