@@ -5,6 +5,7 @@
  */
 package AddTool;
 
+import java.net.InetSocketAddress;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,7 +40,7 @@ public class TThreadPoolServerDemo {
         try {
             TProcessor tprocessor = new AddService.Processor<AddService.Iface>(new AddServiceImpl());
       
-            TServerSocket tnbSocketTransport = new TServerSocket(SERVER_PORT);         
+            TServerSocket tnbSocketTransport = new TServerSocket(new InetSocketAddress("localhost", count));         
             TThreadPoolServer.Args thsArgs = new TThreadPoolServer.Args(tnbSocketTransport);
             thsArgs.processor(tprocessor);
             thsArgs.transportFactory(new TFastFramedTransport.Factory());

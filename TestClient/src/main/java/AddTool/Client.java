@@ -25,14 +25,14 @@ public class Client {
     
     private static String HOST = "localhost";
     private static int PORT = 9090;
-    private static int MAX_THREAD = 5;
+    private static int MAX_THREAD = 15;
     private static ClientPool<AddService.Client> pool;
     
     public static void main(String[] args){
         
         Config poolConfig = new Config();
         
-        poolConfig.maxActive = 3;
+        poolConfig.maxActive = 10;
        // poolConfig.minIdle = 5;
        // poolConfig.maxIdle = 10;
         poolConfig.whenExhaustedAction = GenericObjectPool.WHEN_EXHAUSTED_BLOCK;
@@ -50,7 +50,7 @@ public class Client {
         
         ExecutorService executor = Executors.newFixedThreadPool(MAX_THREAD);
         
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 15; i++) {
             executor.submit(new ClientThread(i));
         }
             
@@ -70,12 +70,12 @@ public class Client {
                     AddService.Client client = pool.getClient();
                 
                     for (int i = 0; i < 10; i++) {
-                        this.inThread = client.Add(inThread, 0);
-                        System.out.println("Thread "+ inThread+" lan "+ i);
-                        Thread.sleep(50);
+                        client.Ping();
+//                        this.inThread = client.Add(inThread, 0);
+//                        System.out.println("Thread "+ inThread+" lan "+ i);
+//                        Thread.sleep(50);
                     }
                     pool.returnClient(client);
-                    Thread.sleep(100);
                 }
                 
                 
