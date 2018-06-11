@@ -40,7 +40,7 @@ public class TThreadPoolServerDemo {
         try {
             TProcessor tprocessor = new AddService.Processor<AddService.Iface>(new AddServiceImpl());
       
-            TServerSocket tnbSocketTransport = new TServerSocket(new InetSocketAddress("localhost", count));         
+            TServerSocket tnbSocketTransport = new TServerSocket(new InetSocketAddress("localhost", SERVER_PORT));         
             TThreadPoolServer.Args thsArgs = new TThreadPoolServer.Args(tnbSocketTransport);
             thsArgs.processor(tprocessor);
             thsArgs.transportFactory(new TFastFramedTransport.Factory());
