@@ -5,10 +5,12 @@
  */
 package AddTool;
 
-import static AddTool.TThreadPoolServerDemo.count;
+import static AddTool.TServerDemo.count;
 //import static AddTool.TThreadPoolServerDemo.begin;
 
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.thrift.TException;
 
 /**
@@ -32,7 +34,10 @@ public class AddServiceImpl implements AddService.Iface{
 
     @Override
     public synchronized void Ping() throws TException {
-        count++;
+        //count++;
+        while(true){
+            System.out.println("Ping");
+        }
     }
 
     
