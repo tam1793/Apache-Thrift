@@ -34,10 +34,10 @@ public class AddServiceImpl implements AddService.Iface{
 
     @Override
     public synchronized void Ping() throws TException {
-        //count++;
-        while(true){
-            System.out.println("Ping");
-        }
+        count++;
+//        while(true){
+//            System.out.println("Ping");
+//        }
     }
 
     

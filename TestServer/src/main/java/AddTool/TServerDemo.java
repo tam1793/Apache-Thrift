@@ -42,7 +42,7 @@ public class TServerDemo {
     private int SERVER_PORT = 9090;
     private int TIME_OUT = 30000;
     private int MIN_WORKER = 5;
-    private typeServer type = typeServer.TThreadedSelectorServer;
+    private typeServer type = typeServer.TThreadPoolServer;
     
     
     public void startServer(){
@@ -128,7 +128,7 @@ public class TServerDemo {
         public void run(){
             while(true){
                 System.out.println(count);
-                //count = 0;
+                count = 0;
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {

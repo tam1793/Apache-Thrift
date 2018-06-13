@@ -65,15 +65,13 @@ public class TClientDemo {
                 transport.open();
   //              client.Ping();
                 while(true){
-                    long thisTime = Calendar.getInstance().getTimeInMillis();
 //                    for (int i = 0; i < 1000; i++) {
 //                                          int result = client.Add(_number, _number);
 //  
 //                    }
-                    int result = client.Add(_number, _number);
-                    System.out.println(result);
-                        //client.Ping();
-                        System.out.println(Calendar.getInstance().getTimeInMillis()-thisTime);
+//                    int result = client.Add(_number, _number);
+//                    System.out.println(result);
+                        client.Ping();
                 }                
             } catch (TException ex) {
                 Logger.getLogger(TClientDemo.class.getName()).log(Level.SEVERE, null, ex);
